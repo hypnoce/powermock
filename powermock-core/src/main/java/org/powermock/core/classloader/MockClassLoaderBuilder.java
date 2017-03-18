@@ -17,6 +17,7 @@
 
 package org.powermock.core.classloader;
 
+import org.powermock.core.classloader.javassist.JavassistMockClassLoader;
 import org.powermock.core.transformers.MockTransformer;
 import org.powermock.utils.ArrayUtil;
 
@@ -37,11 +38,11 @@ public class MockClassLoaderBuilder {
     }
 
     public MockClassLoader build() {
-        MockClassLoader classLoader = new MockClassLoader();
+        
+        MockClassLoaderConfiguration configuration = new MockClassLoaderConfiguration(classesToModify, packagesToIgnore);
+        MockClassLoader classLoader = new JavassistMockClassLoader(configuration);
 
         classLoader.setMockTransformerChain(mockTransformerChain);
-        classLoader.addIgnorePackage(packagesToIgnore);
-        classLoader.addClassesToModify(classesToModify);
 
         return classLoader;
     }

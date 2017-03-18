@@ -17,15 +17,16 @@
 
 package org.powermock.core.classloader;
 
-import javassist.CtClass;
+import org.powermock.core.transformers.ClassWrapper;
 
 /**
- *  Instance of this interface can be used to mark {@link CtClass} that it was created and loaded by PowerMock
+ * Instance of this interface can be used to mark a class that it was created and loaded by PowerMock
  */
-public interface JavaAssistClassMarker {
+public interface ClassMarker {
     /**
      * Mark type as loaded by PowerMock
+     *
      * @param type to mark.
      */
-    void mark(CtClass type);
+    <T> void mark(ClassWrapper<T> type);
 }
